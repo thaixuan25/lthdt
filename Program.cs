@@ -10,14 +10,10 @@ static class Program
 {
     /// <summary>
     /// The main entry point for the application.
-    /// Áp dụng OOP: Khởi chạy LoginForm trước, sau đó MainForm
     /// </summary>
     [STAThread]
     static void Main(string[] args)
     {
-        // ============================================================
-        // CHẠY UTILITY MODE (Console) nếu có tham số --setup
-        // ============================================================
         if (args.Length > 0 && args[0] == "--setup")
         {
             Console.WriteLine("Chế độ Setup - Console Utility");
@@ -26,23 +22,10 @@ static class Program
             return;
         }
 
-        // ============================================================
-        // TẠO USER MẶC ĐỊNH NẾU CHƯA CÓ (Uncomment nếu cần)
-        // ============================================================
-        // Uncomment 3 dòng dưới để tự động tạo admin user lần đầu chạy
-        // Console.WriteLine("Tạo user mặc định...");
-        // HashPasswordConsole.CreateAllDefaultUsers();
-        // Console.WriteLine("Nhấn phím bất kỳ để tiếp tục...");
-        // Console.ReadKey();
-
-        // ============================================================
-        // CHẠY ỨNG DỤNG WINDOWS FORMS (Normal mode)
-        // ============================================================
         ApplicationConfiguration.Initialize();
 
         try
         {
-            // Test database connection
             if (!DatabaseConnection.TestConnection(out string errorMessage))
             {
                 MessageBox.Show(
@@ -60,12 +43,10 @@ static class Program
                 return;
             }
 
-            // Hiển thị LoginForm
             using (var loginForm = new LoginForm())
             {
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
-                    // Đăng nhập thành công -> Mở MainForm
                     Application.Run(new MainForm());
                 }
             }

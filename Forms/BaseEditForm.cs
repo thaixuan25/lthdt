@@ -14,7 +14,6 @@ namespace LTHDT2.Forms
     /// </summary>
     public abstract class BaseEditForm<T> : BaseForm where T : BaseEntity, new()
     {
-        // Protected fields
         protected T Entity { get; set; } = null!;
         protected bool IsEditMode => Entity?.Id > 0;
         
@@ -52,13 +51,11 @@ namespace LTHDT2.Forms
             this.MinimizeBox = false;
             this.BackColor = UITheme.BackgroundMain;
 
-            // Main Panel (chứa các controls)
             mainPanel = UITheme.CreatePanel(withBorder: false);
             mainPanel.Dock = DockStyle.Fill;
             mainPanel.Padding = new Padding(20);
             mainPanel.AutoScroll = true;
 
-            // Button Panel (Bottom)
             buttonPanel = UITheme.CreatePanel(withBorder: false);
             buttonPanel.Dock = DockStyle.Bottom;
             buttonPanel.Height = 70;
@@ -71,10 +68,9 @@ namespace LTHDT2.Forms
             btnCancel = UITheme.CreateSecondaryButton("❌ Hủy", 120, UITheme.ButtonHeight);
             btnCancel.Click += BtnCancel_Click;
 
-            // Căn giữa buttons
             buttonPanel.Resize += (s, e) =>
             {
-                int totalWidth = 250; // tổng width của 2 buttons + spacing
+                int totalWidth = 250;
                 int startX = (buttonPanel.Width - totalWidth) / 2;
                 btnSave.Location = new Point(startX, 15);
                 btnCancel.Location = new Point(startX + 130, 15);
@@ -83,7 +79,6 @@ namespace LTHDT2.Forms
             buttonPanel.Controls.Add(btnSave);
             buttonPanel.Controls.Add(btnCancel);
 
-            // Add panels to form
             this.Controls.Add(mainPanel);
             this.Controls.Add(buttonPanel);
         }
@@ -97,10 +92,8 @@ namespace LTHDT2.Forms
 
             try
             {
-                // Khởi tạo controls của class con
                 InitializeFormControls();
 
-                // Nếu là Edit mode, load dữ liệu
                 if (IsEditMode)
                 {
                     LoadEntity();
@@ -163,7 +156,6 @@ namespace LTHDT2.Forms
         /// </summary>
         protected virtual void AfterSave()
         {
-            // Override nếu cần xử lý thêm sau khi save
         }
 
         #endregion
@@ -174,30 +166,24 @@ namespace LTHDT2.Forms
         {
             try
             {
-                // Validate
                 if (!ValidateInput())
                 {
                     return;
                 }
 
-                // Before save hook
                 if (!BeforeSave())
                 {
                     return;
                 }
 
-                // Save
                 SaveEntity();
 
-                // After save hook
                 AfterSave();
 
-                // Show success message
                 ShowSuccess(IsEditMode 
                     ? $"Cập nhật {GetEntityName()} thành công!" 
                     : $"Thêm {GetEntityName()} thành công!");
 
-                // Close form với result OK
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -231,8 +217,6 @@ namespace LTHDT2.Forms
         /// </summary>
         protected virtual bool HasChanges()
         {
-            // Default: assume có thay đổi nếu form đã được mở
-            // Class con có thể override để check chi tiết hơn
             return true;
         }
 

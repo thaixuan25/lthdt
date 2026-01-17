@@ -48,33 +48,27 @@ namespace LTHDT2.Forms
 
         protected override void InitializeFormControls()
         {
-            // Increase form height
             this.Size = new System.Drawing.Size(800, 650);
 
             int startY = 20;
             int spacing = 45;
             int currentY = startY;
 
-            // Candidate
             AddLabelAndComboBox("Ứng viên:", ref cmbCandidate, currentY, 550);
             LoadCandidates();
             currentY += spacing;
 
-            // Job Posting
             AddLabelAndComboBox("Vị trí ứng tuyển:", ref cmbJobPosting, currentY, 550);
             LoadJobPostings();
             currentY += spacing;
 
-            // Apply Date
             AddLabelAndDateTimePicker("Ngày nộp:", ref dtpApplyDate, currentY, 200);
             dtpApplyDate.Value = DateTime.Now;
             currentY += spacing;
 
-            // Cover Letter
             AddLabelAndTextBox("Thư xin việc:", ref txtCoverLetter, currentY, true, 80);
             currentY += 80 + 10;
 
-            // Source
             AddLabelAndComboBox("Nguồn ứng tuyển:", ref cmbSource, currentY, 200);
             cmbSource.Items.AddRange(new[] { 
                 "Website", "LinkedIn", "Facebook", "Referral", "Job Fair", "Email", "Other" 
@@ -82,7 +76,6 @@ namespace LTHDT2.Forms
             cmbSource.SelectedIndex = 0;
             currentY += spacing;
 
-            // Status
             AddLabelAndComboBox("Trạng thái:", ref cmbStatus, currentY, 200);
             cmbStatus.Items.AddRange(new[] { 
                 "Nộp đơn", "Sơ tuyển", "Phỏng vấn vòng 1", 
@@ -91,18 +84,15 @@ namespace LTHDT2.Forms
             cmbStatus.SelectedIndex = 0;
             currentY += spacing;
 
-            // Score
             AddLabelAndNumericUpDown("Điểm đánh giá:", ref numScore, currentY, 0, 100, 100);
             numScore.Value = 0;
             numScore.Enabled = false;
             numScore.BackColor = System.Drawing.Color.FromArgb(240, 240, 240);
             currentY += spacing;
 
-            // Notes
             AddLabelAndTextBox("Ghi chú HR:", ref txtNotes, currentY, true, 80);
             currentY += 80 + 10;
 
-            // Info label
             var lblInfo = new Label
             {
                 Text = "💡 Điểm từ 0-100. Thay đổi trạng thái sẽ gửi email thông báo cho ứng viên",
@@ -175,7 +165,6 @@ namespace LTHDT2.Forms
         {
             try
             {
-                // Select candidate
                 for (int i = 0; i < cmbCandidate.Items.Count; i++)
                 {
                     dynamic item = cmbCandidate.Items[i]!;
@@ -186,7 +175,6 @@ namespace LTHDT2.Forms
                     }
                 }
 
-                // Select job posting
                 for (int i = 0; i < cmbJobPosting.Items.Count; i++)
                 {
                     dynamic item = cmbJobPosting.Items[i]!;
@@ -200,7 +188,6 @@ namespace LTHDT2.Forms
                 dtpApplyDate.Value = Entity.ApplyDate;
                 txtCoverLetter.Text = Entity.CoverLetter ?? "";
                 
-                // Select source
                 if (!string.IsNullOrEmpty(Entity.Source))
                 {
                     for (int i = 0; i < cmbSource.Items.Count; i++)
@@ -213,7 +200,6 @@ namespace LTHDT2.Forms
                     }
                 }
 
-                // Select status
                 for (int i = 0; i < cmbStatus.Items.Count; i++)
                 {
                     if (cmbStatus.Items[i].ToString() == Entity.CurrentStatus)
@@ -226,7 +212,6 @@ namespace LTHDT2.Forms
                 numScore.Value = Entity.Score;
                 txtNotes.Text = Entity.Notes ?? "";
 
-                // Disable candidate and job posting edit in edit mode
                 cmbCandidate.Enabled = false;
                 cmbJobPosting.Enabled = false;
                 cmbCandidate.BackColor = System.Drawing.Color.FromArgb(240, 240, 240);
@@ -240,7 +225,6 @@ namespace LTHDT2.Forms
 
         protected override bool ValidateInput()
         {
-            // Validate Candidate
             if (cmbCandidate.SelectedItem == null)
             {
                 ShowWarning("Vui lòng chọn ứng viên!");
@@ -248,7 +232,6 @@ namespace LTHDT2.Forms
                 return false;
             }
 
-            // Validate Job Posting
             if (cmbJobPosting.SelectedItem == null)
             {
                 ShowWarning("Vui lòng chọn vị trí ứng tuyển!");
@@ -256,7 +239,6 @@ namespace LTHDT2.Forms
                 return false;
             }
 
-            // Validate Status
             if (cmbStatus.SelectedItem == null)
             {
                 ShowWarning("Vui lòng chọn trạng thái!");
@@ -264,7 +246,6 @@ namespace LTHDT2.Forms
                 return false;
             }
 
-            // Check duplicate application (only for new applications)
             if (!IsEditMode)
             {
                 dynamic candidate = cmbCandidate.SelectedItem!;
@@ -284,7 +265,6 @@ namespace LTHDT2.Forms
         {
             try
             {
-                // Map data from controls to entity
                 dynamic selectedCandidate = cmbCandidate.SelectedItem!;
                 Entity.CandidateId = (int)selectedCandidate.Id;
                 
@@ -303,10 +283,8 @@ namespace LTHDT2.Forms
                     ? null 
                     : txtNotes.Text.Trim();
                     
-                // Set updated by current user
                 Entity.UpdatedBy = SessionManager.CurrentEmployeeId;
 
-                // Save to database
                 if (IsEditMode)
                 {
                     if (!_repository.Update(Entity))

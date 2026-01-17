@@ -47,15 +47,11 @@ namespace LTHDT2.Forms
             this.FormClosing += MainForm_FormClosing;
             this.BackColor = UITheme.BackgroundMain;
 
-            // ====================
-            // SIDEBAR (Left - 347px)
-            // ====================
             sidebarPanel = UITheme.CreatePanel(withBorder: false);
             sidebarPanel.Dock = DockStyle.Left;
             sidebarPanel.Width = UITheme.SidebarWidth;
             sidebarPanel.BorderRadius = 0;
 
-            // Logo/Title Panel
             var logoPanel = UITheme.CreatePanel(withBorder: false);
             logoPanel.Dock = DockStyle.Top;
             logoPanel.Height = 120;
@@ -86,7 +82,6 @@ namespace LTHDT2.Forms
             logoPanel.Controls.Add(lblLogo);
             logoPanel.Controls.Add(lblLogoSub);
 
-            // Menu Container (scrollable)
             var menuContainer = new Guna2Panel
             {
                 Dock = DockStyle.Fill,
@@ -94,10 +89,8 @@ namespace LTHDT2.Forms
                 AutoScroll = true
             };
 
-            // Menu Groups
             CreateMenuGroups(menuContainer);
 
-            // Bottom User Info Panel
             var bottomPanel = UITheme.CreatePanel(withBorder: false);
             bottomPanel.Dock = DockStyle.Bottom;
             bottomPanel.Height = 100;
@@ -125,9 +118,6 @@ namespace LTHDT2.Forms
             sidebarPanel.Controls.Add(bottomPanel);
             sidebarPanel.Controls.Add(logoPanel);
 
-            // ====================
-            // HEADER (Top - 108px)
-            // ====================
             headerPanel = UITheme.CreatePanel(withBorder: false);
             headerPanel.Dock = DockStyle.Top;
             headerPanel.Height = UITheme.HeaderHeight;
@@ -155,36 +145,28 @@ namespace LTHDT2.Forms
             headerPanel.Controls.Add(lblUserInfo);
             headerPanel.Controls.Add(lblDateTime);
             
-            // Timer để cập nhật thời gian
             statusTimer = new System.Windows.Forms.Timer();
-            statusTimer.Interval = 1000; // 1 giây
+            statusTimer.Interval = 1000;
             statusTimer.Tick += (s, e) => lblDateTime.Text = DateTime.Now.ToString("HH:mm:ss - dd/MM/yyyy");
             statusTimer.Start();
 
-            // ====================
-            // CONTENT AREA (Fill)
-            // ====================
             contentPanel = UITheme.CreatePanel(withBorder: false);
             contentPanel.Dock = DockStyle.Fill;
             contentPanel.BackColor = UITheme.BackgroundMain;
             contentPanel.BorderRadius = 0;
             contentPanel.Padding = new Padding(15);
 
-            // Welcome Panel
             CreateWelcomePanel();
 
-            // Add controls to form in correct order
             this.Controls.Add(contentPanel);
             this.Controls.Add(headerPanel);
             this.Controls.Add(sidebarPanel);
 
-            // Make sure controls are visible
             if (sidebarPanel != null) sidebarPanel.Visible = true;
             if (headerPanel != null) headerPanel.Visible = true;
             if (contentPanel != null) contentPanel.Visible = true;
             if (welcomePanel != null) welcomePanel.Visible = true;
 
-            // Setup permissions
             SetupPermissions();
         }
 
@@ -192,7 +174,6 @@ namespace LTHDT2.Forms
         {
             int yPos = 10;
 
-            // === HỆ THỐNG ===
             var lblSystem = CreateMenuGroupLabel("HỆ THỐNG");
             lblSystem.Location = new Point(0, yPos);
             menuContainer.Controls.Add(lblSystem);
@@ -212,7 +193,6 @@ namespace LTHDT2.Forms
             menuContainer.Controls.Add(btnChangePassword);
             yPos += UITheme.ButtonHeightMenu + 10;
 
-            // === NHÂN VIÊN ===
             var lblEmployee = CreateMenuGroupLabel("NHÂN VIÊN");
             lblEmployee.Location = new Point(0, yPos);
             menuContainer.Controls.Add(lblEmployee);
@@ -287,7 +267,6 @@ namespace LTHDT2.Forms
             menuContainer.Controls.Add(btnInterviews);
             yPos += UITheme.ButtonHeightMenu + 10;
 
-            // === BÁO CÁO ===
             var lblReport = CreateMenuGroupLabel("BÁO CÁO");
             lblReport.Location = new Point(0, yPos);
             menuContainer.Controls.Add(lblReport);
@@ -367,14 +346,11 @@ namespace LTHDT2.Forms
             welcomePanel.Size = new Size(800, 500);
             welcomePanel.BackColor = UITheme.BackgroundPanel;
 
-            // Center in content panel
             CenterWelcomePanel();
             welcomePanel.Anchor = AnchorStyles.None;
             
-            // Update position when content panel resizes
             contentPanel.Resize += (s, e) => CenterWelcomePanel();
 
-            // Title
             var lblWelcomeTitle = new Label
             {
                 Text = "HỆ THỐNG QUẢN LÝ NHÂN SỰ",
@@ -386,7 +362,6 @@ namespace LTHDT2.Forms
                 TextAlign = ContentAlignment.MiddleCenter
             };
             
-            // Welcome message
             var lblWelcome = new Label
             {
                 Text = $"Xin chào, {CurrentUser?.Username}!",
@@ -398,7 +373,6 @@ namespace LTHDT2.Forms
                 TextAlign = ContentAlignment.MiddleCenter
             };
             
-            // Role info
             var lblRole = new Label
             {
                 Text = $"Vai trò: {CurrentUser?.Role}",
@@ -410,8 +384,6 @@ namespace LTHDT2.Forms
                 TextAlign = ContentAlignment.MiddleCenter
             };
             
-            
-            // Version label
             var lblVersion = new Label
             {
                 Text = "Phiên bản 1.0 - © 2026",
@@ -432,7 +404,6 @@ namespace LTHDT2.Forms
             {
                 contentPanel.Controls.Add(welcomePanel);
                 welcomePanel.BringToFront();
-                // Center again after adding to panel
                 CenterWelcomePanel();
             }
         }
@@ -460,14 +431,12 @@ namespace LTHDT2.Forms
         {
             try
             {
-                // Dừng timer
                 if (statusTimer != null)
                 {
                     statusTimer.Stop();
                     statusTimer.Dispose();
                 }
 
-                // Close active child form
                 if (activeChildForm != null && !activeChildForm.IsDisposed)
                 {
                     if (!Confirm("Có cửa sổ đang mở. Bạn có chắc muốn đóng?"))
@@ -489,15 +458,12 @@ namespace LTHDT2.Forms
             }
             catch (Exception ex)
             {
-                // Log error but don't prevent closing
                 System.Diagnostics.Debug.WriteLine($"Error closing form: {ex.Message}");
             }
         }
 
         private void SetupPermissions()
         {
-            // Ẩn/hiện menu theo quyền
-            // Có thể implement sau nếu cần
         }
 
         private void MenuChangePassword_Click(object? sender, EventArgs e)
@@ -505,7 +471,6 @@ namespace LTHDT2.Forms
             var form = new ChangePasswordForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                // Đăng xuất sau khi đổi mật khẩu thành công
                 MenuLogout_Click(sender, e);
             }
         }
@@ -519,7 +484,6 @@ namespace LTHDT2.Forms
                 
                 this.Close();
                 
-                // Hiển thị LoginForm lại
                 var loginForm = new LoginForm();
                 if (loginForm.ShowDialog() == DialogResult.OK)
                 {
@@ -533,13 +497,11 @@ namespace LTHDT2.Forms
         {
             try
             {
-                // Hide welcome panel
                 if (welcomePanel != null && welcomePanel.Visible)
                 {
                     welcomePanel.Visible = false;
                 }
 
-                // Close previous child form
                 if (activeChildForm != null && !activeChildForm.IsDisposed)
                 {
                     try
@@ -557,30 +519,23 @@ namespace LTHDT2.Forms
                     return;
                 }
 
-                // Setup child form properties BEFORE adding to parent
                 childForm.TopLevel = false;
                 childForm.FormBorderStyle = FormBorderStyle.None;
                 childForm.Dock = DockStyle.Fill;
-                childForm.Visible = false; // Hide initially
+                childForm.Visible = false;
                 
-                // Update page title first
                 if (lblPageTitle != null)
                 {
                     lblPageTitle.Text = pageTitle;
                 }
                 
-                // Store reference BEFORE adding to panel
                 activeChildForm = childForm;
                 
-                // Attach FormClosed event handler BEFORE showing
                 childForm.FormClosed += ChildForm_FormClosed;
                 
-                // Add to content panel
                 contentPanel.Controls.Add(childForm);
                 childForm.BringToFront();
                 
-                // Show form AFTER it's been added and configured
-                // Use BeginInvoke to ensure form is fully initialized
                 this.BeginInvoke(new Action(() =>
                 {
                     try
@@ -591,11 +546,9 @@ namespace LTHDT2.Forms
                             childForm.Show();
                             childForm.BringToFront();
                             
-                            // Force layout update
                             childForm.PerformLayout();
                             childForm.Update();
                             
-                            // Try to focus, but don't fail if it doesn't work
                             try
                             {
                                 childForm.Focus();

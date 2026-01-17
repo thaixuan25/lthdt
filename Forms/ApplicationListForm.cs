@@ -36,15 +36,11 @@ namespace LTHDT2.Forms
 
         protected override void SetupDataGridView()
         {
-            // Expand search panel height for 2 rows of filters
             searchPanel.Height = 120;
             searchPanel.Padding = new Padding(15, 15, 15, 15);
 
-            // Clear existing controls from BaseListForm (txtSearch and its label)
-            // We'll add them back with proper layout
             searchPanel.Controls.Clear();
 
-            // Row 1: Search
             var lblSearch = UITheme.CreateLabel("Tìm kiếm:", UITheme.BodyBold);
             lblSearch.Location = new Point(15, 20);
             lblSearch.Size = new Size(100, 25);
@@ -55,7 +51,6 @@ namespace LTHDT2.Forms
             txtSearch.Size = new Size(400, UITheme.InputHeight);
             searchPanel.Controls.Add(txtSearch);
 
-            // Row 2: Filters
             var lblJobPosting = UITheme.CreateLabel("Tin tuyển dụng:", UITheme.BodyBold);
             lblJobPosting.Location = new Point(15, 75);
             lblJobPosting.Size = new Size(120, 25);
@@ -83,7 +78,6 @@ namespace LTHDT2.Forms
             cmbStatusFilter.SelectedIndexChanged += (s, e) => ApplyFilters();
             searchPanel.Controls.Add(cmbStatusFilter);
 
-            // Setup columns
             dataGridView.AutoGenerateColumns = false;
             
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn
@@ -151,7 +145,6 @@ namespace LTHDT2.Forms
             {
                 var applications = _repository.GetAll().ToList();
                 
-                // Load filters
                 LoadFilters();
 
                 allData = applications;
@@ -169,7 +162,6 @@ namespace LTHDT2.Forms
         {
             try
             {
-                // Load job postings
                 var jobPostings = _jobPostingRepository.GetAll().ToList();
                 cmbJobPostingFilter.Items.Clear();
                 cmbJobPostingFilter.Items.Add(new { Id = 0, Display = "(Tất cả)" });
@@ -191,7 +183,6 @@ namespace LTHDT2.Forms
         {
             var filtered = allData.AsEnumerable();
 
-            // Filter by job posting
             if (cmbJobPostingFilter.SelectedItem != null)
             {
                 dynamic jobItem = cmbJobPostingFilter.SelectedItem;
@@ -201,14 +192,12 @@ namespace LTHDT2.Forms
                 }
             }
 
-            // Filter by status
             var selectedStatus = cmbStatusFilter.SelectedItem?.ToString();
             if (!string.IsNullOrEmpty(selectedStatus) && selectedStatus != "(Tất cả)")
             {
                 filtered = filtered.Where(a => a.CurrentStatus == selectedStatus);
             }
 
-            // Apply search keyword
             var keyword = txtSearch.Text.Trim();
             if (!string.IsNullOrWhiteSpace(keyword))
             {
@@ -226,12 +215,6 @@ namespace LTHDT2.Forms
 
         private void UpdateDisplayData(List<AppModel> applications)
         {
-            // Enrich application objects with formatted properties for display
-            foreach (var app in applications)
-            {
-                // Properties will be accessed directly from Application object
-            }
-            
             dataGridView.DataSource = null;
             dataGridView.DataSource = applications;
         }
