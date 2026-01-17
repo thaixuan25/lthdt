@@ -334,8 +334,6 @@ namespace LTHDT2.Forms
         {
             base.AfterSave();
             
-            // TODO: Gửi email thông báo cho ứng viên khi thay đổi trạng thái
-            // Tùy chọn: Có thể implement sau nếu EmailService đã sẵn sàng
         }
     }
 }
