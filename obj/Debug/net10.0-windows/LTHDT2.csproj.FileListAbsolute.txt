@@ -79,3 +79,4 @@ C:\Users\Thai Xuan\Downloads\Compressed\LTHDT2-20260116T072047Z-3-001\LTHDT2\obj
 C:\Users\Thai Xuan\Downloads\Compressed\LTHDT2-20260116T072047Z-3-001\LTHDT2\bin\Debug\net10.0-windows\Guna.UI2.dll
 C:\Users\Thai Xuan\Downloads\Compressed\LTHDT2-20260116T072047Z-3-001\LTHDT2\bin\Debug\net10.0-windows\System.Management.dll
 C:\Users\Thai Xuan\Downloads\Compressed\LTHDT2-20260116T072047Z-3-001\LTHDT2\bin\Debug\net10.0-windows\runtimes\win\lib\net7.0\System.Management.dll
+C:\Users\Thai Xuan\Downloads\Compressed\LTHDT2-20260116T072047Z-3-001\LTHDT2\obj\Debug\net10.0-windows\LTHDT2.sourcelink.json

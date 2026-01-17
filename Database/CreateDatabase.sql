@@ -1,8 +1,3 @@
--- ================================================================
--- HỆ THỐNG QUẢN LÝ NHÂN SỰ - DATABASE SCRIPT
--- Version: 2.0
--- Database: MySQL 8.0+
--- ================================================================
 
 -- Tạo database
 DROP DATABASE IF EXISTS HRManagementDB;
@@ -113,7 +108,7 @@ CREATE TABLE Headcount (
 ) ENGINE=InnoDB;
 
 -- ================================================================
--- 6. BẢNG RECRUITMENTCAMPAIGN - Đợt tuyển dụng (không thuộc phòng ban)
+-- 6. BẢNG RECRUITMENTCAMPAIGN - Đợt tuyển dụng
 -- ================================================================
 CREATE TABLE RecruitmentCampaign (
     CampaignID INT AUTO_INCREMENT PRIMARY KEY,
@@ -134,7 +129,7 @@ CREATE TABLE RecruitmentCampaign (
 ) ENGINE=InnoDB;
 
 -- ================================================================
--- 7. BẢNG JOBPOSTING - Tin tuyển dụng (thuộc phòng ban và vị trí)
+-- 7. BẢNG JOBPOSTING - Tin tuyển dụng
 -- ================================================================
 CREATE TABLE JobPosting (
     JobPostingID INT AUTO_INCREMENT PRIMARY KEY,
@@ -169,7 +164,7 @@ CREATE TABLE JobPosting (
 ) ENGINE=InnoDB;
 
 -- ================================================================
--- 9. BẢNG CANDIDATE - Hồ sơ ứng viên (hồ sơ gốc)
+-- 8. BẢNG CANDIDATE - Hồ sơ ứng viên
 -- ================================================================
 CREATE TABLE Candidate (
     CandidateID INT AUTO_INCREMENT PRIMARY KEY,
@@ -192,7 +187,7 @@ CREATE TABLE Candidate (
 ) ENGINE=InnoDB;
 
 -- ================================================================
--- 10. BẢNG APPLICATION - Đơn ứng tuyển (QUAN TRỌNG)
+-- 9. BẢNG APPLICATION - Đơn ứng tuyển (QUAN TRỌNG)
 -- ================================================================
 CREATE TABLE Application (
     ApplicationID INT AUTO_INCREMENT PRIMARY KEY,
@@ -215,24 +210,9 @@ CREATE TABLE Application (
     INDEX idx_application_date (ApplyDate)
 ) ENGINE=InnoDB;
 
--- ================================================================
--- 11. BẢNG APPLICATIONSTATUS - Lịch sử trạng thái đơn ứng tuyển
--- ================================================================
-CREATE TABLE ApplicationStatus (
-    StatusID INT AUTO_INCREMENT PRIMARY KEY,
-    ApplicationID INT NOT NULL,
-    StatusName VARCHAR(50) NOT NULL,
-    Comments TEXT,
-    StatusDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UpdatedBy INT NOT NULL,
-    FOREIGN KEY (ApplicationID) REFERENCES Application(ApplicationID) ON DELETE CASCADE,
-    FOREIGN KEY (UpdatedBy) REFERENCES Employee(EmployeeID),
-    INDEX idx_status_application (ApplicationID),
-    INDEX idx_status_date (StatusDate)
-) ENGINE=InnoDB;
 
 -- ================================================================
--- 12. BẢNG INTERVIEW - Phỏng vấn
+-- 10. BẢNG INTERVIEW - Phỏng vấn
 -- ================================================================
 CREATE TABLE Interview (
     InterviewID INT AUTO_INCREMENT PRIMARY KEY,
@@ -255,7 +235,7 @@ CREATE TABLE Interview (
 ) ENGINE=InnoDB;
 
 -- ================================================================
--- 13. BẢNG EMAILLOG - Log email gửi đi
+-- 11. BẢNG EMAILLOG
 -- ================================================================
 CREATE TABLE EmailLog (
     EmailLogID INT AUTO_INCREMENT PRIMARY KEY,
@@ -274,7 +254,7 @@ CREATE TABLE EmailLog (
 ) ENGINE=InnoDB;
 
 -- ================================================================
--- DỮ LIỆU MẪU (Sample Data)
+-- DỮ LIỆU MẪU
 -- ================================================================
 
 -- Insert Positions
@@ -343,10 +323,4 @@ INSERT INTO Candidate (FullName, Email, Phone, DateOfBirth, Gender, Address, Edu
  'Hà Nội', 'Đại học Bách Khoa', '3',
  'C#, MySQL, Entity Framework, React');
 
--- ================================================================
--- HOÀN THÀNH TẠO DATABASE
--- ================================================================
-
-SELECT 'Database HRManagementDB đã được tạo thành công!' AS Message;
-SELECT COUNT(*) AS TotalTables FROM information_schema.tables WHERE table_schema = 'HRManagementDB';
 
