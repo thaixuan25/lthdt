@@ -4,7 +4,6 @@ namespace LTHDT2.Models
 {
     /// <summary>
     /// Model EmailLog - Log email gửi đi
-    /// Liên kết với Application
     /// </summary>
     public class EmailLog : BaseEntity
     {

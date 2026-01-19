@@ -11,7 +11,6 @@ namespace LTHDT2.Services
 {
     /// <summary>
     /// Email Service - Implement IEmailService
-    /// Thể hiện Polymorphism qua Method Overloading
     /// </summary>
     public class EmailService : BaseService, IEmailService
     {
@@ -42,17 +41,15 @@ namespace LTHDT2.Services
         }
 
         /// <summary>
-        /// Method Overloading #1 - POLYMORPHISM
-        /// Gửi email đơn giản (text)
+        /// Method Overloading
         /// </summary>
         public bool SendEmail(string to, string subject, string body)
         {
-            return SendEmail(to, subject, body, false); // Gọi overload khác
+            return SendEmail(to, subject, body, false);
         }
 
         /// <summary>
-        /// Method Overloading #2 - POLYMORPHISM
-        /// Gửi email với tùy chọn HTML
+        /// Gửi email với định dạng HTML
         /// </summary>
         public bool SendEmail(string to, string subject, string body, bool isHtml)
         {
@@ -277,8 +274,6 @@ namespace LTHDT2.Services
         {
             try
             {
-                // TODO: Load template từ file
-                // Placeholder: {CandidateName}, {JobTitle}, etc.
                 var template = "Template content here...";
                 
                 foreach (var placeholder in placeholders)
@@ -324,7 +319,7 @@ namespace LTHDT2.Services
     }
 
     /// <summary>
-    /// EmailLog Repository - Đơn giản
+    /// EmailLog Repository
     /// </summary>
     public class EmailLogRepository : DataAccess.Repositories.BaseRepository<EmailLog>
     {
@@ -332,7 +327,6 @@ namespace LTHDT2.Services
 
         public override EmailLog? GetById(int id)
         {
-            // Simple implementation
             return null;
         }
 

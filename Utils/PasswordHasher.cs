@@ -5,14 +5,13 @@ using System.Text;
 namespace LTHDT2.Utils
 {
     /// <summary>
-    /// Password Hasher - Mã hóa mật khẩu với SHA256 + Salt
+    /// Mã hóa mật khẩu với SHA256 + Salt
     /// </summary>
     public static class PasswordHasher
     {
         /// <summary>
         /// Hash password với salt
         /// </summary>
-        /// <returns>Tuple (PasswordHash, Salt)</returns>
         public static (string hash, string salt) Hash(string password)
         {
             // Tạo salt ngẫu nhiên
@@ -38,7 +37,7 @@ namespace LTHDT2.Utils
         /// </summary>
         private static string GenerateSalt()
         {
-            var bytes = new byte[32]; // 256 bits
+            var bytes = new byte[32];
             using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(bytes);

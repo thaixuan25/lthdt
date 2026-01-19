@@ -9,7 +9,6 @@ namespace LTHDT2.Services
 {
     /// <summary>
     /// Interview Service - Quản lý lịch phỏng vấn
-    /// Kế thừa BaseService
     /// </summary>
     public class InterviewService : BaseService
     {
@@ -76,7 +75,7 @@ namespace LTHDT2.Services
                     }
                 }
 
-                // Check duplicate date (giữ lại logic cũ để tránh trùng ngày)
+                // Check duplicate date
                 var existingInterviews = _interviewRepository.GetByApplicationId(interview.ApplicationId)
                     .Where(i => i.InterviewDate.Date == interview.InterviewDate.Date && 
                                string.IsNullOrEmpty(i.Result) && 
@@ -382,7 +381,6 @@ namespace LTHDT2.Services
                 if (updated)
                 {
                     Log.Error($"Interview cancelled: ID={interviewId}");
-                    // Optionally send cancellation email
                 }
 
                 return updated;

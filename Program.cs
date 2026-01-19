@@ -14,14 +14,6 @@ static class Program
     [STAThread]
     static void Main(string[] args)
     {
-        if (args.Length > 0 && args[0] == "--setup")
-        {
-            Console.WriteLine("Chế độ Setup - Console Utility");
-            Console.WriteLine();
-            HashPasswordConsole.RunInteractiveMenu();
-            return;
-        }
-
         ApplicationConfiguration.Initialize();
 
         try
@@ -34,7 +26,6 @@ static class Program
                     "1. MySQL Server đã chạy chưa?\n" +
                     "2. Connection string trong App.config\n" +
                     "3. Database đã được tạo chưa?\n\n" +
-                    "💡 TIP: Chạy ứng dụng với tham số --setup để tạo user:\n" +
                     "   dotnet run --setup",
                     "Lỗi Database",
                     MessageBoxButtons.OK,

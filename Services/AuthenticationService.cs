@@ -211,7 +211,7 @@ namespace LTHDT2.Services
             catch (Exception ex)
             {
                 LogError(nameof(CreateUser), ex);
-                throw; // Re-throw để UI hiển thị message
+                throw;
             }
         }
     }

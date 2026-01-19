@@ -3,8 +3,7 @@ using LTHDT2.Models;
 namespace LTHDT2.Utils
 {
     /// <summary>
-    /// Session Manager - Quản lý user hiện tại
-    /// Singleton pattern
+    /// Quản lý user hiện tại
     /// </summary>
     public static class SessionManager
     {

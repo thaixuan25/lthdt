@@ -8,10 +8,6 @@ namespace LTHDT2.DataAccess.Repositories
 {
     /// <summary>
     /// Base Repository Abstract Class
-    /// Áp dụng: Abstraction + Inheritance
-    /// - Abstract methods: bắt buộc class con implement
-    /// - Virtual methods: class con có thể override
-    /// - Concrete methods: class con dùng trực tiếp
     /// </summary>
     public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
@@ -31,10 +27,6 @@ namespace LTHDT2.DataAccess.Repositories
         {
             _connectionString = DatabaseConnection.ConnectionString;
         }
-
-        // ============================================================
-        // ABSTRACT METHODS - Class con BẮT BUỘC phải implement
-        // ============================================================
 
         /// <summary>
         /// Lấy entity theo ID - Abstract method
@@ -56,10 +48,6 @@ namespace LTHDT2.DataAccess.Repositories
         /// Cập nhật entity - Abstract method
         /// </summary>
         public abstract bool Update(T entity);
-
-        // ============================================================
-        // VIRTUAL METHODS - Class con CÓ THỂ override
-        // ============================================================
 
         /// <summary>
         /// Xóa entity - Virtual method (có implementation mặc định)
@@ -136,10 +124,6 @@ namespace LTHDT2.DataAccess.Repositories
                 return false;
             }
         }
-
-        // ============================================================
-        // PROTECTED HELPER METHODS - Class con sử dụng
-        // ============================================================
 
         /// <summary>
         /// Tạo MySqlConnection - Protected method

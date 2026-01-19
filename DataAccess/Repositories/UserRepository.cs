@@ -7,7 +7,6 @@ namespace LTHDT2.DataAccess.Repositories
 {
     /// <summary>
     /// User Repository - Kế thừa BaseRepository
-    /// Áp dụng Inheritance và Polymorphism (override abstract methods)
     /// </summary>
     public class UserRepository : BaseRepository<User>
     {
@@ -189,8 +188,7 @@ namespace LTHDT2.DataAccess.Repositories
         }
 
         /// <summary>
-        /// Private method - Map DataReader sang User entity
-        /// Encapsulation - chỉ dùng nội bộ
+        /// Map DataReader sang User entity
         /// </summary>
         private User MapToEntity(MySqlDataReader reader)
         {

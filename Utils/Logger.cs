@@ -56,15 +56,13 @@ namespace LTHDT2.Utils
             {
                 var logMessage = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] [{level}] {message}";
                 File.AppendAllText(LogFilePath, logMessage + Environment.NewLine);
-                
-                // Also write to console in debug mode
                 #if DEBUG
                 Console.WriteLine(logMessage);
                 #endif
             }
             catch
             {
-                // Silently ignore logging errors
+                // IGNORE ERRORS
             }
         }
     }

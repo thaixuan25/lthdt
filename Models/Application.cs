@@ -3,9 +3,7 @@ using System;
 namespace LTHDT2.Models
 {
     /// <summary>
-    /// Model Application - Đơn ứng tuyển (QUAN TRỌNG NHẤT)
-    /// Đại diện cho MỘT LẦN ứng tuyển của ứng viên vào một tin tuyển dụng
-    /// Một Candidate có thể có nhiều Application
+    /// Model Application - Đơn ứng tuyển
     /// </summary>
     public class Application : BaseEntity
     {

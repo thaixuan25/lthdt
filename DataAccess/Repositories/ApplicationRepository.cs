@@ -7,7 +7,7 @@ using AppModel = LTHDT2.Models.Application;
 namespace LTHDT2.DataAccess.Repositories
 {
     /// <summary>
-    /// Application Repository - QUAN TRỌNG NHẤT
+    /// Application Repository
     /// Quản lý đơn ứng tuyển
     /// </summary>
     public class ApplicationRepository : BaseRepository<AppModel>

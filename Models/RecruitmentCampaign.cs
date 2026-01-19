@@ -4,7 +4,6 @@ namespace LTHDT2.Models
 {
     /// <summary>
     /// Model RecruitmentCampaign - Đợt tuyển dụng
-    /// Không thuộc phòng ban cụ thể, chỉ là "tag" để nhóm các tin tuyển dụng
     /// </summary>
     public class RecruitmentCampaign : BaseEntity
     {

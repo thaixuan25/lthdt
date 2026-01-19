@@ -8,18 +8,17 @@ using AppModel = LTHDT2.Models.Application;
 namespace LTHDT2.Services
 {
     /// <summary>
-    /// Application Service - Core business logic
+    /// Application Service
     /// Quản lý đơn ứng tuyển
     /// </summary>
     public class ApplicationService : BaseService
     {
         private readonly ApplicationRepository _applicationRepository;
         private readonly CandidateRepository _candidateRepository;
-        private readonly IEmailService? _emailService; // Dependency Injection qua Interface
+        private readonly IEmailService? _emailService;
 
         /// <summary>
-        /// Constructor Injection - nhận EmailService qua interface
-        /// Thể hiện Polymorphism và Dependency Injection
+        /// Constructor Injection
         /// </summary>
         public ApplicationService(IEmailService? emailService = null)
         {
@@ -81,7 +80,7 @@ namespace LTHDT2.Services
                 // Load đầy đủ thông tin để gửi email
                 var fullApplication = _applicationRepository.GetById(id);
 
-                // Gửi email xác nhận (nếu có EmailService)
+                // Gửi email xác nhận
                 if (_emailService != null && fullApplication != null)
                 {
                     try
@@ -128,6 +127,7 @@ namespace LTHDT2.Services
 
                 // Cập nhật
                 application.CurrentStatus = newStatus;
+                
                 // if (score.HasValue)
                 //     application.Score = score.Value;
                 

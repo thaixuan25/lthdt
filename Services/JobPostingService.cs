@@ -8,8 +8,7 @@ using LTHDT2.Utils;
 namespace LTHDT2.Services
 {
     /// <summary>
-    /// JobPosting Service - Business logic cho tin tuyển dụng
-    /// Kế thừa BaseService
+    /// JobPosting Service
     /// </summary>
     public class JobPostingService : BaseService
     {

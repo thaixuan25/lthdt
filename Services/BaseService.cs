@@ -6,12 +6,10 @@ namespace LTHDT2.Services
 {
     /// <summary>
     /// Base Service Abstract Class
-    /// Áp dụng Abstraction và Inheritance
-    /// Chứa logic chung cho tất cả services
     /// </summary>
     public abstract class BaseService
     {
-        // Protected - class con có thể truy cập
+        // Protected
         protected readonly User? _currentUser;
 
         /// <summary>
@@ -23,20 +21,16 @@ namespace LTHDT2.Services
         }
 
         /// <summary>
-        /// Log hành động - Protected method
-        /// Class con có thể gọi để log
+        /// Log actions method
         /// </summary>
         protected void LogAction(string action, string details)
         {
             var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             var username = _currentUser?.Username ?? "Anonymous";
             var message = $"[{timestamp}] User: {username} - {action}: {details}";
-            
-            // TODO: Implement proper logging (file, database, etc.)
+        
             Console.WriteLine(message);
             
-            // Có thể lưu vào file hoặc database
-            // LogToFile(message);
         }
 
         /// <summary>
@@ -81,7 +75,7 @@ namespace LTHDT2.Services
         }
 
         /// <summary>
-        /// Log lỗi - Protected method
+        /// Log error method
         /// </summary>
         protected void LogError(string methodName, Exception ex)
         {
@@ -90,8 +84,6 @@ namespace LTHDT2.Services
             var message = $"[{timestamp}] ERROR - User: {username} - {methodName}: {ex.Message}\nStackTrace: {ex.StackTrace}";
             
             Console.WriteLine(message);
-            
-            // TODO: Log to file or database
         }
 
         /// <summary>

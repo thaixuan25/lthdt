@@ -5,7 +5,6 @@ namespace LTHDT2.Models
 {
     /// <summary>
     /// Model Employee - Nhân viên
-    /// Áp dụng đầy đủ Encapsulation với validation chi tiết
     /// </summary>
     public class Employee : BaseEntity
     {
@@ -20,7 +19,7 @@ namespace LTHDT2.Models
         private string _status = string.Empty;
 
         /// <summary>
-        /// Mã nhân viên - Validation và tự động uppercase
+        /// Mã nhân viên
         /// </summary>
         public string EmployeeCode
         {
@@ -34,7 +33,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Họ tên - Validation
+        /// Họ tên
         /// </summary>
         public string FullName
         {
@@ -48,8 +47,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Email - Validation format và tự động lowercase
-        /// Private method để validate email (Encapsulation)
+        /// Email
         /// </summary>
         public string Email
         {
@@ -63,7 +61,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Số điện thoại - Validation format
+        /// Số điện thoại
         /// </summary>
         public string? Phone
         {
@@ -146,8 +144,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Private method - Validate email format (Encapsulation)
-        /// Chỉ dùng nội bộ trong class
+        /// Private method - Validate email format
         /// </summary>
         private bool IsValidEmail(string email)
         {
@@ -156,7 +153,7 @@ namespace LTHDT2.Models
 
             try
             {
-                // Simple regex cho email
+                // regex cho email
                 var regex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
                 return regex.IsMatch(email);
             }
@@ -174,7 +171,6 @@ namespace LTHDT2.Models
             if (string.IsNullOrWhiteSpace(phone))
                 return false;
 
-            // Cho phép số VN: 10-11 số, bắt đầu bằng 0
             var regex = new Regex(@"^0\d{9,10}$");
             return regex.IsMatch(phone.Replace(" ", "").Replace("-", ""));
         }

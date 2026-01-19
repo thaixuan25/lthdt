@@ -4,12 +4,9 @@ namespace LTHDT2.Models
 {
     /// <summary>
     /// Model Position - Vị trí công việc
-    /// Áp dụng Encapsulation: Private fields + Public properties với validation
-    /// Kế thừa từ BaseEntity (Inheritance)
     /// </summary>
     public class Position : BaseEntity
     {
-        // Private fields - Đóng gói dữ liệu
         private string _positionCode = string.Empty;
         private string _positionName = string.Empty;
         private string? _description;
@@ -19,7 +16,7 @@ namespace LTHDT2.Models
         private bool _isActive;
 
         /// <summary>
-        /// Mã vị trí - Validation: không được trống
+        /// Mã vị trí
         /// </summary>
         public string PositionCode
         {
@@ -33,7 +30,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Tên vị trí - Validation: không được trống, tối thiểu 2 ký tự
+        /// Tên vị trí
         /// </summary>
         public string PositionName
         {
@@ -57,7 +54,6 @@ namespace LTHDT2.Models
 
         /// <summary>
         /// Cấp bậc: 1=Junior, 2=Middle, 3=Senior, 4=Lead, 5=Manager
-        /// Validation: từ 1 đến 5
         /// </summary>
         public int Level
         {
@@ -71,7 +67,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Lương tối thiểu - Validation: không âm
+        /// Lương tối thiểu
         /// </summary>
         public decimal MinSalary
         {
@@ -85,7 +81,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Lương tối đa - Validation: không âm và phải >= MinSalary
+        /// Lương tối đa
         /// </summary>
         public decimal MaxSalary
         {
@@ -119,7 +115,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Override IsValid - Polymorphism
+        /// Override IsValid
         /// </summary>
         public override bool IsValid()
         {
@@ -130,7 +126,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Public method - Hiển thị tên đầy đủ
+        /// Hiển thị tên đầy đủ
         /// </summary>
         public string GetDisplayName()
         {
@@ -138,7 +134,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Public method - Lấy tên cấp bậc
+        /// Lấy tên cấp bậc
         /// </summary>
         public string GetLevelName()
         {

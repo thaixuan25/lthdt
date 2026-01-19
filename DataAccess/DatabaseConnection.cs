@@ -5,7 +5,6 @@ using MySql.Data.MySqlClient;
 namespace LTHDT2.DataAccess
 {
     /// <summary>
-    /// Database Connection Helper
     /// Quản lý connection string và tạo connection
     /// </summary>
     public static class DatabaseConnection

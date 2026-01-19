@@ -8,19 +8,16 @@ using LTHDT2.Utils;
 namespace LTHDT2.Services
 {
     /// <summary>
-    /// Recruitment Campaign Service - Quản lý đợt tuyển dụng
-    /// Kế thừa BaseService
+    /// Recruitment Campaign Service
     /// </summary>
     public class RecruitmentCampaignService : BaseService
     {
         private readonly RecruitmentCampaignRepository _campaignRepository;
-        private readonly CampaignJobPostingRepository _campaignJobRepository;
         private readonly JobPostingRepository _jobPostingRepository;
 
         public RecruitmentCampaignService()
         {
             _campaignRepository = new RecruitmentCampaignRepository();
-            _campaignJobRepository = new CampaignJobPostingRepository();
             _jobPostingRepository = new JobPostingRepository();
         }
 
@@ -93,25 +90,28 @@ namespace LTHDT2.Services
         {
             try
             {
-                // Check if already exists
-                if (_campaignJobRepository.ExistsInCampaign(campaignId, jobPostingId))
+                var jobPosting = _jobPostingRepository.GetById(jobPostingId);
+                if (jobPosting == null)
+                {
+                    Log.Error($"Job posting {jobPostingId} not found");
+                    return false;
+                }
+
+                // Check if already in this campaign
+                if (jobPosting.CampaignId == campaignId)
                 {
                     Log.Error($"Job {jobPostingId} already in campaign {campaignId}");
                     return false;
                 }
 
-                var campaignJob = new CampaignJobPosting
-                {
-                    CampaignId = campaignId,
-                    JobPostingId = jobPostingId,
-                    AddedDate = DateTime.Now
-                };
-
-                var id = _campaignJobRepository.Add(campaignJob);
+                // Set campaign ID
+                jobPosting.CampaignId = campaignId;
                 
-                if (id > 0)
+                bool updated = _jobPostingRepository.Update(jobPosting);
+                
+                if (updated)
                 {
-                    Log.Error($"Added job {jobPostingId} to campaign {campaignId}");
+                    Log.Info($"Added job {jobPostingId} to campaign {campaignId}");
                     return true;
                 }
 
@@ -131,14 +131,32 @@ namespace LTHDT2.Services
         {
             try
             {
-                bool removed = _campaignJobRepository.RemoveFromCampaign(campaignId, jobPostingId);
-                
-                if (removed)
+                var jobPosting = _jobPostingRepository.GetById(jobPostingId);
+                if (jobPosting == null)
                 {
-                    Log.Error($"Removed job {jobPostingId} from campaign {campaignId}");
+                    Log.Error($"Job posting {jobPostingId} not found");
+                    return false;
                 }
 
-                return removed;
+                // Check if job is in this campaign
+                if (jobPosting.CampaignId != campaignId)
+                {
+                    Log.Error($"Job {jobPostingId} is not in campaign {campaignId}");
+                    return false;
+                }
+
+                // Remove from campaign (set to 0)
+                jobPosting.CampaignId = 0;
+                
+                bool updated = _jobPostingRepository.Update(jobPosting);
+                
+                if (updated)
+                {
+                    Log.Info($"Removed job {jobPostingId} from campaign {campaignId}");
+                    return true;
+                }
+
+                return false;
             }
             catch (Exception ex)
             {
@@ -154,11 +172,8 @@ namespace LTHDT2.Services
         {
             try
             {
-                var campaignJobs = _campaignJobRepository.GetByCampaignId(campaignId).ToList();
-                var jobIds = campaignJobs.Select(cj => cj.JobPostingId).ToList();
-
                 return _jobPostingRepository.GetAll()
-                    .Where(j => jobIds.Contains(j.Id))
+                    .Where(j => j.CampaignId == campaignId)
                     .ToList();
             }
             catch (Exception ex)
@@ -242,9 +257,6 @@ namespace LTHDT2.Services
                 var jobs = GetCampaignJobs(campaignId);
                 int totalPositions = jobs.Sum(j => j.NumberOfPositions);
                 
-                // Đếm số applications cho các jobs trong campaign
-                // (cần ApplicationRepository)
-
                 return new CampaignStatistics
                 {
                     CampaignId = campaignId,

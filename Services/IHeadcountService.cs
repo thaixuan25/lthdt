@@ -2,7 +2,6 @@ namespace LTHDT2.Services
 {
     /// <summary>
     /// Interface Headcount Service
-    /// Kiểm tra định biên nhân sự
     /// </summary>
     public interface IHeadcountService
     {

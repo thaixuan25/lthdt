@@ -8,7 +8,6 @@ namespace LTHDT2.Services
 {
     /// <summary>
     /// Headcount Service - Quản lý định biên nhân sự
-    /// Kế thừa BaseService
     /// </summary>
     public class HeadcountService : BaseService, IHeadcountService
     {
@@ -191,7 +190,7 @@ namespace LTHDT2.Services
         }
 
         /// <summary>
-        /// Tăng số lượng đã tuyển (khi hiring thành công)
+        /// Tăng số lượng đã tuyển
         /// </summary>
         public bool IncrementFilledCount(int departmentId, int positionId, int year, int incrementBy = 1)
         {

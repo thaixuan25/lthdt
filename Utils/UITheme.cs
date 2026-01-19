@@ -7,7 +7,6 @@ namespace LTHDT2.Utils
 {
     /// <summary>
     /// UITheme - Quản lý tập trung tất cả màu sắc, fonts và styling
-    /// Theo PROMPT_UI_DESIGN_GUIDE.md
     /// </summary>
     public static class UITheme
     {
@@ -89,7 +88,7 @@ namespace LTHDT2.Utils
         #region Helper Methods - Buttons
 
         /// <summary>
-        /// Tạo Primary Button với style chuẩn
+        /// Tạo Primary Button
         /// </summary>
         public static Guna2Button CreatePrimaryButton(string text, int width = 120, int height = 40)
         {
@@ -109,7 +108,7 @@ namespace LTHDT2.Utils
         }
 
         /// <summary>
-        /// Tạo Secondary Button với style chuẩn
+        /// Tạo Secondary Button
         /// </summary>
         public static Guna2Button CreateSecondaryButton(string text, int width = 120, int height = 40)
         {
@@ -191,7 +190,7 @@ namespace LTHDT2.Utils
         #region Helper Methods - TextBoxes
 
         /// <summary>
-        /// Tạo TextBox với style chuẩn
+        /// Tạo TextBox
         /// </summary>
         public static Guna2TextBox CreateTextBox(string placeholder = "", bool multiline = false, int height = 55)
         {
@@ -223,7 +222,7 @@ namespace LTHDT2.Utils
         #region Helper Methods - ComboBoxes
 
         /// <summary>
-        /// Tạo ComboBox với style chuẩn
+        /// Tạo ComboBox
         /// </summary>
         public static Guna2ComboBox CreateComboBox(int height = 40)
         {
@@ -251,7 +250,7 @@ namespace LTHDT2.Utils
         #region Helper Methods - Panels
 
         /// <summary>
-        /// Tạo Panel với style chuẩn
+        /// Tạo Panel
         /// </summary>
         public static Guna2Panel CreatePanel(bool withBorder = false, int borderRadius = 8)
         {
@@ -288,7 +287,7 @@ namespace LTHDT2.Utils
         #region Helper Methods - DataGridView
 
         /// <summary>
-        /// Apply style chuẩn cho DataGridView
+        /// Apply style
         /// </summary>
         public static void ApplyDataGridViewStyle(Guna2DataGridView dgv)
         {
@@ -337,7 +336,7 @@ namespace LTHDT2.Utils
         #region Helper Methods - DateTimePicker
 
         /// <summary>
-        /// Tạo DateTimePicker với style chuẩn
+        /// Tạo DateTimePicker
         /// </summary>
         public static Guna2DateTimePicker CreateDateTimePicker()
         {
@@ -354,9 +353,6 @@ namespace LTHDT2.Utils
                 Height = InputHeight
             };
             
-            // Note: Guna2DateTimePicker may not have FocusedState/HoverState in some versions
-            // Remove these if compilation errors occur
-            
             return dtp;
         }
 
@@ -365,7 +361,7 @@ namespace LTHDT2.Utils
         #region Helper Methods - NumericUpDown
 
         /// <summary>
-        /// Apply style chuẩn cho NumericUpDown
+        /// Apply cho NumericUpDown
         /// </summary>
         public static void ApplyNumericUpDownStyle(NumericUpDown nud)
         {
@@ -378,7 +374,7 @@ namespace LTHDT2.Utils
         #region Helper Methods - Labels
 
         /// <summary>
-        /// Tạo Label với style chuẩn
+        /// Tạo Label
         /// </summary>
         public static Label CreateLabel(string text, Font? font = null, Color? foreColor = null)
         {

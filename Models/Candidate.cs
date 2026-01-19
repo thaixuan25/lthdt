@@ -4,8 +4,7 @@ using System.Text.RegularExpressions;
 namespace LTHDT2.Models
 {
     /// <summary>
-    /// Model Candidate - Hồ sơ ứng viên (hồ sơ gốc)
-    /// Một người chỉ có 1 bản ghi Candidate duy nhất
+    /// Model Candidate - Hồ sơ ứng viên
     /// </summary>
     public class Candidate : BaseEntity
     {
@@ -151,7 +150,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Alias: CurrentStatus = Status
+        /// Status
         /// </summary>
         public string Status
         {
@@ -159,7 +158,7 @@ namespace LTHDT2.Models
             set => _currentStatus = value?.Trim() ?? "Mới";
         }
 
-        // Alias cho CVFilePath để tương thích
+        // CVFilePath
         public string? CVFilePath
         {
             get => _resumeFilePath;

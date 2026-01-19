@@ -4,7 +4,6 @@ namespace LTHDT2.Models
 {
     /// <summary>
     /// Model Interview - Phỏng vấn
-    /// Liên kết với Application (không phải Candidate trực tiếp)
     /// </summary>
     public class Interview : BaseEntity
     {
@@ -95,15 +94,13 @@ namespace LTHDT2.Models
             set => _result = value?.Trim();
         }
 
-        // ========== ALIAS PROPERTIES (để tương thích với Repository/Service) ==========
-        
         /// <summary>
-        /// InterviewerName - tên người phỏng vấn (mặc định sẽ lấy từ Employee table)
+        /// InterviewerName
         /// </summary>
         public string InterviewerName { get; set; } = string.Empty;
 
         /// <summary>
-        /// Alias: InterviewNotes = Notes
+        /// Notes
         /// </summary>
         public string? Notes
         {
@@ -122,7 +119,7 @@ namespace LTHDT2.Models
 
         public Interview()
         {
-            _interviewDate = DateTime.Now.AddDays(3); // Mặc định sau 3 ngày
+            _interviewDate = DateTime.Now.AddDays(3);
             _score = 0;
             _result = "Pending";
         }

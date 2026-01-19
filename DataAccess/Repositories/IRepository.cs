@@ -6,10 +6,8 @@ namespace LTHDT2.DataAccess.Repositories
 {
     /// <summary>
     /// Generic Repository Interface - Áp dụng Abstraction
-    /// Định nghĩa "contract" cho tất cả Repository
     /// T phải là BaseEntity hoặc class kế thừa từ BaseEntity
     /// </summary>
-    /// <typeparam name="T">Entity type phải kế thừa từ BaseEntity</typeparam>
     public interface IRepository<T> where T : BaseEntity
     {
         /// <summary>

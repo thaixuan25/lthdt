@@ -4,7 +4,6 @@ namespace LTHDT2.Models
 {
     /// <summary>
     /// Model JobPosting - Tin tuyển dụng
-    /// Thuộc phòng ban và vị trí cụ thể
     /// </summary>
     public class JobPosting : BaseEntity
     {
@@ -198,10 +197,9 @@ namespace LTHDT2.Models
             }
         }
 
-        // ========== ALIAS PROPERTIES (để tương thích với Repository/Service) ==========
         
         /// <summary>
-        /// Alias: VacancyCount = NumberOfPositions
+        /// NumberOfPositions
         /// </summary>
         public int NumberOfPositions
         {
@@ -210,7 +208,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Alias: JobResponsibilities = Responsibilities
+        /// Responsibilities
         /// </summary>
         public string? Responsibilities
         {
@@ -219,7 +217,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Alias: JobRequirements = Requirements
+        /// Requirements
         /// </summary>
         public string? Requirements
         {
@@ -228,7 +226,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Alias: WorkLocation = Location
+        /// Location
         /// </summary>
         public string? Location
         {

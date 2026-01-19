@@ -5,8 +5,6 @@ namespace LTHDT2.Services
 {
     /// <summary>
     /// Interface Email Service
-    /// Áp dụng Abstraction - Định nghĩa contract cho email
-    /// Thể hiện Polymorphism qua method overloading
     /// </summary>
     public interface IEmailService
     {

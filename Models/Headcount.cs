@@ -88,11 +88,9 @@ namespace LTHDT2.Models
                 _approvedBy = value;
             }
         }
-
-        // ========== ALIAS PROPERTIES ==========
         
         /// <summary>
-        /// Alias: FilledCount = CurrentCount (để tương thích)
+        /// CurrentCount
         /// </summary>
         public int CurrentCount
         {

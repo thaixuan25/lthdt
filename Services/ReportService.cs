@@ -8,8 +8,7 @@ using LTHDT2.Utils;
 namespace LTHDT2.Services
 {
     /// <summary>
-    /// Report Service - Tạo báo cáo tuyển dụng
-    /// Kế thừa BaseService
+    /// Report Service
     /// </summary>
     public class ReportService : BaseService
     {
@@ -237,7 +236,6 @@ namespace LTHDT2.Services
             if (!hiredApps.Any())
                 return 0;
 
-            // Giả sử thời gian = UpdatedDate - ApplyDate
             var times = hiredApps.Where(a => a.UpdatedDate.HasValue)
                 .Select(a => (a.UpdatedDate!.Value - a.ApplyDate).TotalDays);
 

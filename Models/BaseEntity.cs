@@ -3,13 +3,11 @@ using System;
 namespace LTHDT2.Models
 {
     /// <summary>
-    /// Base Entity class - Áp dụng OOP: Encapsulation và Abstraction
-    /// Abstract class không thể khởi tạo trực tiếp
-    /// Chứa các properties chung cho tất cả entities
+    /// Base Entity class
     /// </summary>
     public abstract class BaseEntity
     {
-        // Private fields - Đóng gói dữ liệu (Encapsulation)
+        // Private fields
         private int _id;
         private DateTime _createdDate;
         private DateTime? _updatedDate;
@@ -29,8 +27,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Ngày tạo - Protected setter: chỉ class con truy cập được
-        /// Thể hiện tính đóng gói (Encapsulation)
+        /// Ngày tạo
         /// </summary>
         public DateTime CreatedDate
         {
@@ -48,7 +45,6 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Protected constructor - chỉ class con có thể gọi
         /// Khởi tạo giá trị mặc định
         /// </summary>
         protected BaseEntity()
@@ -57,7 +53,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Virtual method - có thể override trong class con (Polymorphism)
+        /// Virtual method
         /// </summary>
         public virtual bool IsValid()
         {

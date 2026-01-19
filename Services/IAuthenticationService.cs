@@ -4,7 +4,6 @@ namespace LTHDT2.Services
 {
     /// <summary>
     /// Interface Authentication Service
-    /// Áp dụng Abstraction - Định nghĩa contract cho authentication
     /// </summary>
     public interface IAuthenticationService
     {

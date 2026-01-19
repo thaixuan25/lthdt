@@ -4,7 +4,6 @@ namespace LTHDT2.Models
 {
     /// <summary>
     /// Model Department - Phòng ban
-    /// Áp dụng Encapsulation và Inheritance
     /// </summary>
     public class Department : BaseEntity
     {
@@ -17,7 +16,7 @@ namespace LTHDT2.Models
         private int _maxHeadcount;
 
         /// <summary>
-        /// Mã phòng ban - Validation: không được trống
+        /// Mã phòng ban
         /// </summary>
         public string DepartmentCode
         {
@@ -31,7 +30,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Tên phòng ban - Validation
+        /// Tên phòng ban
         /// </summary>
         public string DepartmentName
         {
@@ -63,7 +62,7 @@ namespace LTHDT2.Models
         }
 
         /// <summary>
-        /// Tên người quản lý (để hiển thị, lấy từ JOIN)
+        /// Tên người quản lý
         /// </summary>
         public string? ManagerName { get; set; }
 
@@ -100,7 +99,7 @@ namespace LTHDT2.Models
             }
         }
 
-        // Navigation properties (cho ORM hoặc join queries)
+        // Navigation properties
         public Employee? Manager { get; set; }
 
         /// <summary>
